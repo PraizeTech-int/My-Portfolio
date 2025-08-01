@@ -121,8 +121,29 @@
       opacity: 0;
     }
 
-    .section:nth-child(even) {
+    .section:nth-of-type(even) {
       animation-delay: 0.3s;
+    }
+
+    .project-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .project-links a {
+      padding: 0.8rem 1.2rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .project-links a:hover {
+      background: #1d4ed8;
     }
 
     @keyframes fadeIn {
@@ -162,6 +183,7 @@
       <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Mode</button>
@@ -182,6 +204,14 @@
     <p>I build responsive websites, landing pages, and user interfaces that adapt beautifully across devices.</p>
   </section>
 
+  <section class="section" id="projects">
+    <h2>Projects</h2>
+    <div class="project-links">
+      <a href="js-carousel.html">JS Carousel</a>
+      <a href="linear-navbar.html">Linear Navbar</a>
+    </div>
+  </section>
+
   <section class="section" id="contact">
     <h2>Contact</h2>
     <p>You can reach me on GitHub, LinkedIn, or email — links coming soon.</p>
@@ -192,7 +222,7 @@
       document.body.classList.toggle("dark");
     }
 
-    // Trigger section fade-up when scrolled into view
+    // Animate sections when in view
     const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
