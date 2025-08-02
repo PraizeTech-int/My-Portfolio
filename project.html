@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -100,6 +99,15 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.5s, color 0.5s;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--text);
+      cursor: pointer;
     }
 
     .hero {
@@ -249,6 +257,24 @@
 
       nav {
         display: none;
+        flex-direction: column;
+        gap: 1rem;
+        background: var(--bg);
+        position: absolute;
+        top: 70px;
+        right: 2rem;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
       }
     }
   </style>
@@ -257,7 +283,8 @@
 <body>
   <header id="main-header">
     <div class="logo" id="logo-text">PraiseTech</div>
-    <nav>
+    <button class="menu-toggle" id="menu-btn">&#9776;</button>
+    <nav id="nav-menu">
       <a href="index.html">Home</a>
       <a href="#projects">Projects</a>
     </nav>
@@ -309,6 +336,8 @@
     const body = document.body;
     const header = document.getElementById('main-header');
     const logo = document.getElementById('logo-text');
+    const menuBtn = document.getElementById('menu-btn');
+    const navMenu = document.getElementById('nav-menu');
 
     toggleBtn.addEventListener('click', () => {
       body.classList.toggle('dark');
@@ -318,7 +347,10 @@
       toggleBtn.textContent = isDark ? 'Dark' : 'Light';
       logo.style.color = isDark ? '#f1f5f9' : 'transparent';
     });
+
+    menuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
   </script>
 </body>
-
 </html>
