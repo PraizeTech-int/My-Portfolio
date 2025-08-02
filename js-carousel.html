@@ -2,96 +2,193 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>True Infinite Image Carousel</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <title>Infinite Auto Carousel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body,
-        html {
-            height: 100%;
-            overflow: hidden;
-        }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+      background: #000;
+    }
 
-        .carousel {
-            width: 100%;
-            height: 80vh;
-            overflow: hidden;
-            position: relative;
-        }
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-        .carousel-track {
-            display: flex;
-            transition: transform 1s ease-in-out;
-            height: 100%;
-        }
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 1s ease-in-out;
+    }
 
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-        }
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+    }
 
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-    </style>
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .arrow:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .arrow.left {
+      left: 20px;
+    }
+
+    .arrow.right {
+      right: 20px;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: white;
+    }
+  </style>
 </head>
 
 <body>
-
-    <div class="carousel">
-        <div class="carousel-track" id="carousel-track">
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/id/1015/1600/800" alt="Image 1">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/id/1016/1600/800" alt="Image 2">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/id/1018/1600/800" alt="Image 3">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/id/1020/1600/800" alt="Image 4">
-            </div>
-            <!-- Duplicate first slide for seamless loop -->
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/id/1015/1600/800" alt="Image 1 Clone">
-            </div>
-        </div>
+  <div class="carousel">
+    <div class="carousel-track" id="carousel-track">
+      <div class="carousel-slide"><img src="https://picsum.photos/id/1015/1600/800" alt="1" /></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/id/1016/1600/800" alt="2" /></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/id/1018/1600/800" alt="3" /></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/id/1020/1600/800" alt="4" /></div>
+      <!-- Clone of first slide -->
+      <div class="carousel-slide"><img src="https://picsum.photos/id/1015/1600/800" alt="1-clone" /></div>
     </div>
 
-    <script>
-        const track = document.getElementById('carousel-track');
-        const slides = document.querySelectorAll('.carousel-slide');
-        const slideCount = slides.length;
-        const intervalTime = 5000; // time each image stays (ms)
-        let index = 0;
+    <button class="arrow left" onclick="prevSlide()">&#10094;</button>
+    <button class="arrow right" onclick="nextSlide()">&#10095;</button>
 
-        function nextSlide() {
-            index++;
-            track.style.transition = "transform 1s ease-in-out";
-            track.style.transform = `translateX(-${index * 100}%)`;
+    <div class="dots" id="dots"></div>
+  </div>
 
-            // Reset back to real first slide (index 0) after the clone
-            if (index === slideCount - 1) {
-                setTimeout(() => {
-                    track.style.transition = "none";
-                    track.style.transform = "translateX(0)";
-                    index = 0;
-                }, 1000); // match transition duration
-            }
-        }
+  <script>
+    const track = document.getElementById('carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+    const realSlides = totalSlides - 1;
+    const dotsContainer = document.getElementById('dots');
 
-        setInterval(nextSlide, intervalTime);
-    </script>
+    let index = 0;
+    let autoSlide;
 
+    // Generate dots
+    for (let i = 0; i < realSlides; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = document.querySelectorAll('.dot');
+
+    function updateDots() {
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index % realSlides].classList.add('active');
+    }
+
+    function goToSlide(i) {
+      index = i;
+      track.style.transition = "transform 1s ease-in-out";
+      track.style.transform = `translateX(-${index * 100}%)`;
+      updateDots();
+    }
+
+    function nextSlide() {
+      index++;
+      track.style.transition = "transform 1s ease-in-out";
+      track.style.transform = `translateX(-${index * 100}%)`;
+      updateDots();
+
+      if (index === totalSlides - 1) {
+        setTimeout(() => {
+          track.style.transition = "none";
+          track.style.transform = "translateX(0)";
+          index = 0;
+          updateDots();
+        }, 1000);
+      }
+    }
+
+    function prevSlide() {
+      if (index === 0) {
+        track.style.transition = "none";
+        index = realSlides - 1;
+        track.style.transform = `translateX(-${(index + 1) * 100}%)`;
+        setTimeout(() => {
+          track.style.transition = "transform 1s ease-in-out";
+          track.style.transform = `translateX(-${index * 100}%)`;
+          updateDots();
+        }, 20);
+      } else {
+        index--;
+        track.style.transition = "transform 1s ease-in-out";
+        track.style.transform = `translateX(-${index * 100}%)`;
+        updateDots();
+      }
+    }
+
+    function startAutoSlide() {
+      autoSlide = setInterval(nextSlide, 5000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlide);
+    }
+
+    // Init
+    goToSlide(0);
+    startAutoSlide();
+
+   
+  </script>
 </body>
 
 </html>
