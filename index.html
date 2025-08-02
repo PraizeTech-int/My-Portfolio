@@ -40,15 +40,7 @@
       top: 0;
       z-index: 10;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      transition: all 0.5s ease;
-    }
-
-    header.dark-mode {
-      justify-content: center;
-      flex-direction: column;
-      gap: 1rem;
-      background-color: #1e293b;
-      animation: slideInDown 0.6s ease forwards;
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -58,7 +50,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
-      transition: color 0.5s ease;
     }
 
     nav {
@@ -101,6 +92,15 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.5s, color 0.5s;
+    }
+
+    .nav-toggle {
+      display: none;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
     }
 
     .hero {
@@ -281,21 +281,32 @@
       }
     }
 
-    @keyframes slideInDown {
-      from {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
+    /* Mobile responsive */
     @media (max-width: 768px) {
       nav {
+        flex-direction: column;
+        width: 100%;
         display: none;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .toggle-theme {
+        align-self: flex-end;
       }
     }
   </style>
@@ -304,7 +315,8 @@
 <body>
   <header id="main-header">
     <div class="logo" id="logo-text">PraiseTech</div>
-    <nav>
+    <button class="nav-toggle" id="nav-toggle">&#9776;</button>
+    <nav id="main-nav">
       <a href="index.html">Home</a>
       <a href="project.html">Projects</a>
     </nav>
@@ -315,7 +327,7 @@
     <div class="profile-section">
       <img src="https://avatars.githubusercontent.com/u/220531930?v=4&size=64" alt="Your Profile Picture" />
       <h2>PraiseTech</h2>
-      <p>Front-End Developer | JavaScript Enthusiast | UI/UX Explorer</p>
+      <p>Front-End Developer | HTML, CSS & JavaScript | UI/UX Minded</p>
     </div>
     <h1>Projects</h1>
     <p>Browse through a collection of cool mini projects built with HTML, CSS, and JavaScript.</p>
@@ -353,14 +365,18 @@
     const body = document.body;
     const header = document.getElementById('main-header');
     const logo = document.getElementById('logo-text');
+    const navToggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('main-nav');
 
     toggleBtn.addEventListener('click', () => {
       body.classList.toggle('dark');
-      header.classList.toggle('dark-mode');
-
       const isDark = body.classList.contains('dark');
       toggleBtn.textContent = isDark ? 'Dark' : 'Light';
       logo.style.color = isDark ? '#f1f5f9' : 'transparent';
+    });
+
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
     });
   </script>
 </body>
