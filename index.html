@@ -217,6 +217,46 @@
       font-weight: 500;
     }
 
+    .view-all-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .view-all-btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(270deg, #3b82f6, #9333ea, #3b82f6);
+      background-size: 400% 400%;
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      text-decoration: none;
+      animation: gradientMove 5s ease infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+    }
+
+    .view-all-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(147, 51, 234, 0.4);
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -284,23 +324,27 @@
   <section id="projects">
     <div class="project-grid">
       <div class="project-card">
-        <img src="carousel-screenshot.jpg" alt="JS Carousel Screenshot" />
-        <h3>JS Carousel</h3>
-        <p>A smooth, infinite image slider built with only HTML, CSS, and JavaScript.</p>
-        <a href="js-carousel.html">View Project</a>
-      </div>
-      <div class="project-card">
-        <img src="navbar-screenshot.jpg" alt="Navbar Screenshot" />
-        <h3>Linear Navbar</h3>
-        <p>An animated navbar styled with a linear gradient effect and hover animations.</p>
-        <a href="linear-navbar.html">View Project</a>
-      </div>
-      <div class="project-card">
-        <img src="price-cards-screenshot.jpg" alt="Pricing Cards Screenshot" />
+        <img src="projects/price-cards/price-plates.png" alt="Pricing Cards Screenshot" />
         <h3>Price Cards</h3>
         <p>Clean pricing cards with toggle support for monthly/yearly switch and animated hover.</p>
-        <a href="price-cards.html">View Project</a>
+        <a href="projects/price-cards/index.html">View Project</a>
       </div>
+      <div class="project-card">
+        <img src="projects/js-carousel/carousel.png" alt="JS Carousel Screenshot" />
+        <h3>JS Carousel</h3>
+        <p>A smooth, infinite image slider built with only HTML, CSS, and JavaScript.</p>
+        <a href="projects/js-carousel/index.html">View Project</a>
+      </div>
+      <div class="project-card">
+        <img src="projects/linear-navbar/navbar.png" alt="Navbar Screenshot" />
+        <h3>Linear Navbar</h3>
+        <p>An animated navbar styled with a linear gradient effect and hover animations.</p>
+        <a href="projects/linear-navbar/index.html">View Project</a>
+      </div>
+    </div>
+
+    <div class="view-all-container">
+      <a href="project.html" class="view-all-btn">View All Projects</a>
     </div>
   </section>
 
@@ -321,6 +365,4 @@
   </script>
 </body>
 
-
 </html>
-
