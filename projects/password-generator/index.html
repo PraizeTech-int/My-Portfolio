@@ -9,12 +9,15 @@
 </head>
 
 <body>
+    <div>
     <h2>Password generator</h2>
 
     <p id="passwordDisplay">password appears here</p>
 
     <button id='genPassword' onclick="generatePassword()" class="btn_generate">Click to generate password</button>
+    </div>
 
+    
     <script>
         function generatePassword() {
             const length = 12;
@@ -29,24 +32,6 @@
             document.getElementById("passwordDisplay").innerText = password;
         };
     </script>
-
-    <!-- <script src="./script.js"></script> -->
 </body>
 
 </html>
-
-<!-- <script>
-        function generatePassword() {
-            const length = 12;
-            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            let password = "";
-
-            for (let i = 0; i < length; i++) {
-                const randomIndex = Math.floor(Math.random() * charset.length);
-
-                password += charset[randomIndex];
-            }
-            console.log('output')
-            // document.getElementById("passwordDisplay").innerText = password;
-        };
-    </script> -->
