@@ -1,0 +1,12 @@
+.btn_generate {
+  background-color: aquamarine;
+  border: none;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn_generate:hover {
+  background-color: rgb(47, 203, 151);
+}
