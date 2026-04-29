@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .tool-btn {
+    @apply flex items-center gap-1 cursor-pointer text-white px-2 py-1 rounded-md 
+           hover:backdrop-blur-lg hover:bg-white/5 active:bg-white/15 transition;
+  }
+
+  .drp-list {
+    @apply px-4 py-2 hover:bg-[#1E293B] cursor-pointer;
+  }
+
+  .underline-amt {
+    @apply relative
+         after:content-[''] after:absolute after:left-0 after:-bottom-0.5
+         after:h-0.5 after:w-0 after:bg-current
+         after:transition-all after:duration-300
+         hover:after:w-full;
+  }
+
+  @keyframes fadeSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeSlideLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    50% {
+      opacity: 1;
+      transform: translateX(-20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 1;
+    }
+
+    40% {
+      opacity: 0.2;
+    }
+
+    60% {
+      opacity: 1;
+    }
+
+    80% {
+      opacity: 0.2;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeSlideRight {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.7s ease-out forwards 1s;
+  }
+  .animate-fade-slide {
+    animation: fadeSlideIn 0.7s ease-out forwards;
+  }
+  .animate-fade-slide-left {
+    animation: fadeSlideLeft 0.7s ease-out forwards;
+  }
+  .animate-fade-slide-right {
+    animation: fadeSlideRight 0.7s ease-out forwards;
+  }
+
+  .card {
+    @apply p-6 mx-6 md:mx-0 inline-flex flex-col items-start gap-2.5  shadow-xl hover:shadow-2xl 
+           backdrop-blur-xl bg-white/10 border border-white/20 
+           rounded-2xl text-center transition;
+  }
+
+  @keyframes open-menu {
+    0% {
+      transform: scaleY(0);
+    }
+    80% {
+      transform: scaleY(1.2);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
+
+  .animate-open-menu {
+    animation: open-menu 0.5s ease-in-out forwards;
+  }
+}
