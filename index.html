@@ -197,6 +197,8 @@
       border-radius: 12px;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
@@ -227,7 +229,7 @@
 
     .project-card a {
       display: inline-block;
-      margin-top: 0.5rem;
+      margin-top: auto;
       color: #6366f1;
       text-decoration: underline;
       font-weight: 500;
@@ -476,11 +478,18 @@ font-size: 1.2rem;
         <a href="projects/js-carousel/index.html">View Project</a>
       </div>
       <div class="project-card">
-        <img src="projects/linear-navbar/navbar.png" alt="Navbar Screenshot" />
-        <h3>Linear Navbar</h3>
-        <p>An animated navbar styled with a linear gradient effect and hover animations.</p>
-        <a href="projects/linear-navbar/index.html">View Project</a>
-      </div>
+          <img
+            src="projects/technyx/build/assets/img/technyx-landing.png"
+            alt="TECHNYX landing page Screenshot"
+          />
+          <h3>TECHNYX Website</h3>
+          <p>
+            TECHNYX is a responsive security company website featuring CCTV
+            surveillance systems, burglary and fire alarm solutions, and modern
+            smart security services with a clean user interface.
+          </p>
+          <a href="projects/technyx/build/index.html">View Project</a>
+        </div>
     </div>
 
     <div class="view-all-container">
