@@ -334,18 +334,9 @@
     font-size: 2.4rem;
   }
 
-  .project-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    padding: 1.5rem;
-  }
-
   header {
     padding: 1rem 1.5rem;
   }
-}
-
-/* Phones */
-@media (max-width: 768px) {
 
   nav {
     flex-direction: column;
@@ -369,8 +360,10 @@
     display: block;
   }
 
-  .toggle-theme {
-    margin-left: auto;
+  .nav-ri{
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
   }
 
   .hero {
@@ -395,9 +388,8 @@
     font-size: 1.5rem;
   }
 
-  .project-grid {
+    .project-grid {
     grid-template-columns: 1fr;
-    padding: 1rem;
   }
 
   .project-card {
@@ -429,12 +421,14 @@
 <body>
   <header id="main-header">
     <div class="logo" id="logo-text">PraiseTech</div>
+    <div class="nav-ri">
     <button class="nav-toggle" id="nav-toggle">&#9776;</button>
+    <button class="toggle-theme" id="toggle-btn">Light</button>
+    </div>
     <nav id="main-nav">
       <a href="index.html">Home</a>
       <a href="project.html">Projects</a>
     </nav>
-    <button class="toggle-theme" id="toggle-btn">Light</button>
   </header>
 
   <section class="hero">
